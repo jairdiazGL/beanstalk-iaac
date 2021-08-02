@@ -1,0 +1,6 @@
+Resources: 
+  BeanstalkApp:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties: 
+      ApplicationName: "beanstalk-demo"
+      Description: "AWS Elastic Beanstalk NodeJS API"

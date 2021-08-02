@@ -1,0 +1,61 @@
+Resources: 
+  BeanstalkTemplate:
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+    Properties:
+      ApplicationName: !Ref BeanstalkApp
+      Description: AWS ElasticBeanstalk Sample Configuration Template
+      OptionSettings:
+        ## IAM
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value: aws-elasticbeanstalk-ec2-role
+
+        ## ASG 
+        - Namespace: aws:autoscaling:asg
+          OptionName: MinSize
+          Value: 1
+
+        - Namespace: aws:autoscaling:asg
+          OptionName: MaxSize
+          Value: 3
+
+        - Namespace: aws:autoscaling:asg
+          OptionName: Cooldown
+          Value: 300
+
+        ## ASG Triggers
+        - Namespace: aws:autoscaling:trigger
+          OptionName: MeasureName
+          Value: CPUUtilization
+
+        - Namespace: aws:autoscaling:trigger
+          OptionName: Statistic
+          Value: Average
+        
+        - Namespace: aws:autoscaling:trigger
+          OptionName: Unit
+          Value: Percent
+
+        - Namespace: aws:autoscaling:trigger
+          OptionName: LowerThreshold
+          Value: 20
+
+        - Namespace: aws:autoscaling:trigger
+          OptionName: UpperThreshold
+          Value: 70
+
+        - Namespace: aws:autoscaling:trigger
+          OptionName: LowerBreachScaleIncrement
+          Value: -1
+
+        - Namespace: aws:autoscaling:trigger
+          OptionName: UpperBreachScaleIncrement
+          Value: 1
+
+        ## XRAY
+        - Namespace: aws:elasticbeanstalk:xray
+          OptionName: XRayEnabled
+          Value: true
+
+
+      SolutionStackName: '64bit Amazon Linux 2 v5.4.4 running Node.js 12'

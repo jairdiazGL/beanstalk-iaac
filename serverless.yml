@@ -1,0 +1,20 @@
+service: beanstalk-demo
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'development'}
+  region: ${opt:region, 'us-east-1'}
+ ## environment:
+   ## BRANCH: master
+   ## OAUTH_TOKEN: token
+  ##  DB_USER: root
+  ##  DB_PASSWORD: root
+
+resources:
+## IAM
+  - ${file(demo-beanstalk/resources/iam/config.yml)}
+## Beanstalk resources
+  - ${file(demo-beanstalk/resources/beanstalk/app.yml)}
+  - ${file(demo-beanstalk/resources/beanstalk/template.yml)}
+  - ${file(demo-beanstalk/resources/beanstalk/environment.yml)}

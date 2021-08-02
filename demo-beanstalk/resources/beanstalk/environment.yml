@@ -1,0 +1,7 @@
+Resources:
+  BeanstalkEnv:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties: 
+      ApplicationName: !Ref BeanstalkApp
+      Description: "AWS ElasticBeanstalk NodeJS Environment"
+      TemplateName: !Ref BeanstalkTemplate
